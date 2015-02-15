@@ -8,10 +8,10 @@
 // TODO 5: Stream: buat model pengumuman, tugas, dan stream (DONE!) :)
 // TODO 6: Stream: membuat CreateNewStream (use-case) + command handler dan Membuat StreamRepository (DONE!) :D
 // TODO 7: Stream: buat pengumuman (DONE!) :)
+// TODO 8: Stream: buat tugas (DONE!) :D
 
 // UNDONE:
-// TODO 8: Stream: buat tugas (On Process!) :D
-// TODO 9: Stream: ..incoming! :D
+// TODO 9: Stream: beranda.. incoming! :D
 // ...
 // ...
 
@@ -24,13 +24,18 @@ Route::group(['middleware' => 'auth'], function() {
 	# Home
 	Route::get('home', ['as' => 'home', 'uses' => 'KelasController@index']);
 
-	# Kelas
+	# Kelas - Tampil Kelas
 	Route::get('mahasiswa/kelas/show/{kelas_id}', ['as' => 'kelas.show-mahasiswa', 'uses' => 'KelasController@getShowKelasMahasiswa']);
 	Route::get('dosen/kelas/show/{kelas_id}', ['as' => 'kelas.show-dosen', 'uses' => 'KelasController@getShowKelasDosen']);
-	Route::get('dosen/kelas/show/{kelas_id}/buat-pengumuman', ['as' => 'kelas.show-buat_pengumuman', 'uses' => 'KelasController@getCreatePengumuman']);
-	Route::post('dosen/kelas/show/{kelas_id}/buat-pengumuman', ['as' => 'kelas.store-buat_pengumuman', 'uses' => 'KelasController@postCreatePengumuman']);
+	# Kelas - Cari kelas
 	Route::post('kelas/cari', ['as' => 'kelas.cari', 'uses' => 'KelasController@postSearch']);
 	Route::post('kelas/join', ['as' => 'kelas.join', 'uses' => 'KelasController@postJoin']);
+	# Kelas - Buat Pengumuman
+	Route::get('dosen/kelas/show/{kelas_id}/buat-pengumuman', ['as' => 'kelas.show-buat_pengumuman', 'uses' => 'KelasController@getCreatePengumuman']);
+	Route::post('dosen/kelas/show/{kelas_id}/buat-pengumuman', ['as' => 'kelas.store-buat_pengumuman', 'uses' => 'KelasController@postCreatePengumuman']);
+	# Kelas - Buat Tugas
+	Route::get('dosen/kelas/show/{kelas_id}/buat-tugas', ['as' => 'kelas.show-buat_tugas', 'uses' => 'KelasController@getCreateTugas']);
+	Route::post('dosen/kelas/show/{kelas_id}/buat-tugas', ['as' => 'kelas.store-buat_tugas', 'uses' => 'KelasController@postCreateTugas']);
 
 	# User
 	Route::resource('users', 'UsersController', ['only' => 'show']);

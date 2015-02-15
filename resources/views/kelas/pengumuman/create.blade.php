@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @include('kelas.partials.nav')
+    @include('kelas.partials.menu-content')
 
     <div class="panel panel-default">
         <form action="{{ route('kelas.store-buat_pengumuman', $kelas->id) }}" method="POST">

@@ -20,9 +20,21 @@ class CreateStreamRequest extends Request {
      * @return array
      */
     public function rules() {
-        return [
-            'content' => 'required'
-        ];
+        $type = $this->get('type');
+
+        if ($type == 'tugas') {
+            $rules = [
+                'judul_tugas' => 'required',
+                'deskripsi_tugas' => 'required',
+                'batas_akhir' => 'required',
+            ];
+        } elseif ($type == 'pengumuman') {
+            $rules =  [
+                'content' => 'required'
+            ];
+        }
+
+        return $rules;
     }
 
 }

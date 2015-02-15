@@ -20,7 +20,7 @@
                     <div class="panel-body">
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus cupiditate, dolore eius fugit iure magnam minima modi nobis odio rem? Cum, ducimus fuga id iure magni necessitatibus numquam praesentium. Quo!</p>
                     </div>
-                    @if ( ! is_null($kelas))
+                    @if ( ! empty($kelas->toArray()))
                         <!-- List group -->
                         <ul class="list-group">
                             @foreach ($kelas as $ruangKelas)

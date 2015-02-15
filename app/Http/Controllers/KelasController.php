@@ -113,4 +113,29 @@ class KelasController extends Controller {
 
         return redirect(route('kelas.show-dosen', $kelas_id));
     }
+
+
+    /**
+     * Menampilkan halaman buat tugas
+     * @param $kelas_id
+     * @return \Illuminate\View\View
+     */
+    public function getCreateTugas($kelas_id) {
+        $kelas = $this->kelasRepository->findById($kelas_id);
+
+        return view('kelas.tugas.create', compact('kelas'));
+    }
+
+
+    /**
+     * Membuat stream baru dengan content tugas
+     * @param $kelas_id
+     * @param CreateStreamRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function postCreateTugas($kelas_id, CreateStreamRequest $request) {
+        $this->dispatch(new CreateNewStreamCommand($request->all()));
+
+        return redirect(route('kelas.show-dosen', $kelas_id));
+    }
 }
