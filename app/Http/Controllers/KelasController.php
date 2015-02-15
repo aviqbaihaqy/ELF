@@ -80,6 +80,7 @@ class KelasController extends Controller {
      */
     public function getShowKelasMahasiswa($kelas_id) {
         $kelas = $this->kelasRepository->findById($kelas_id);
+        $streams = $this->streamRepository->getForKelas($kelas_id);
 
         return view('kelas.show-kelas_mahasiswa', compact('kelas', 'streams'));
     }

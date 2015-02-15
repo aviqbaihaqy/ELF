@@ -65,7 +65,13 @@ class StreamRepository {
     }
 
 
+    /**
+     * Membaca stream untuk kelas tertentu berasarkan id kelas.
+     * @param $kelas_id
+     * @param int $paginate
+     * @return mixed
+     */
     public function getForKelas($kelas_id, $paginate = 10) {
-        return Stream::with('user', 'content')->where('kelas_id', '=', $kelas_id)->orderBy('created_at', 'ascending')->limit($paginate)->simplePaginate($paginate);
+        return Stream::with('kelas', 'user', 'content')->where('kelas_id', '=', $kelas_id)->orderBy('created_at', 'ascending')->limit($paginate)->simplePaginate($paginate);
     }
 }

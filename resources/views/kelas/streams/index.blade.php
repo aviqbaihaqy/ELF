@@ -28,7 +28,13 @@
                                 <strong class="text-muted">Batas Akhir:</strong> {{ $stream->content->batas_akhir->diffForHumans() }}<br/>
                             </p>
                         </p>
-                        <a href="#">Detail tugas</a>
+                        <a href="
+                            @if (Auth::user()->hasRole('Mahasiswa'))
+                                {{ route('kelas.show-tugas_mahasiswa', [$stream->kelas->id, $stream->content->id]) }}
+                            @elseif (Auth::user()->hasRole('Dosen'))
+                                #
+                            @endif
+                        ">Detail tugas</a>
                     @endif
                 </div>
             </div>
