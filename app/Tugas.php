@@ -14,6 +14,12 @@ class Tugas extends Model {
      */
     protected $fillable = ['judul_tugas', 'deskripsi', 'attacment', 'batas_akhir'];
 
+    /**
+     * Attribute yang bakalan dijadikan Carbon sama Eloquent
+     * @var array
+     */
+    protected $dates = ['batas_akhir'];
+
 
     /**
      * Setiap Tugas adalah content milik streams

@@ -5,6 +5,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateStreamRequest;
 use App\Repositories\KelasRepository;
+use App\Repositories\StreamRepository;
 use Flash;
 use Illuminate\Http\Request;
 use League\Flysystem\Exception;
@@ -16,12 +17,19 @@ class KelasController extends Controller {
      */
     protected $kelasRepository;
 
+    /**
+     * @var StreamRepository
+     */
+    private $streamRepository;
+
 
     /**
      * @param KelasRepository $kelasRepository
+     * @param StreamRepository $streamRepository
      */
-    public function __construct(KelasRepository $kelasRepository) {
+    public function __construct(KelasRepository $kelasRepository, StreamRepository $streamRepository) {
         $this->kelasRepository = $kelasRepository;
+        $this->streamRepository = $streamRepository;
     }
 
     /**
@@ -73,7 +81,7 @@ class KelasController extends Controller {
     public function getShowKelasMahasiswa($kelas_id) {
         $kelas = $this->kelasRepository->findById($kelas_id);
 
-        return view('kelas.show-kelas_mahasiswa', compact('kelas'));
+        return view('kelas.show-kelas_mahasiswa', compact('kelas', 'streams'));
     }
 
 
@@ -84,8 +92,9 @@ class KelasController extends Controller {
      */
     public function getShowKelasDosen($kelas_id) {
         $kelas = $this->kelasRepository->findById($kelas_id);
+        $streams = $this->streamRepository->getForKelas($kelas_id);
 
-        return view('kelas.show-kelas_dosen', compact('kelas'));
+        return view('kelas.show-kelas_dosen', compact('kelas', 'streams'));
     }
 
 

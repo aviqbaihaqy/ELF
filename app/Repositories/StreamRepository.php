@@ -63,4 +63,9 @@ class StreamRepository {
 
         return $stream->save();
     }
+
+
+    public function getForKelas($kelas_id, $paginate = 10) {
+        return Stream::with('user', 'content')->where('kelas_id', '=', $kelas_id)->orderBy('created_at', 'ascending')->limit($paginate)->simplePaginate($paginate);
+    }
 }

@@ -6,12 +6,13 @@
 // TODO 3: Sistem kelas: index kelas + tammbah kelas (DONE!) :)
 // TODO 4: Sistem kelas: show kelas (DONE!) :)
 // TODO 5: Stream: buat model pengumuman, tugas, dan stream (DONE!) :)
-// TODO 6: Stream: membuat CreateNewStream (use-case) + command handler dan Membuat StreamRepository (DONE!) :D
+// TODO 6: Stream: membuat CreateNewStream (use-case) + command handler dan Membuat StreamRepository (DONE!) :)
 // TODO 7: Stream: buat pengumuman (DONE!) :)
-// TODO 8: Stream: buat tugas (DONE!) :D
+// TODO 8: Stream: buat tugas (DONE!) :)
+// TODO 9: Stream: beranda.. (DONE!) :)
 
 // UNDONE:
-// TODO 9: Stream: beranda.. incoming! :D
+// TODO 10: Tugas: ..incoming () :D
 // ...
 // ...
 
@@ -21,10 +22,10 @@ Route::get('/', ['middleware' => 'guest', 'uses' => 'WelcomeController@index']);
 # Harus login!
 Route::group(['middleware' => 'auth'], function() {
 
-	# Home
+	# Home - Menampilkan daftar kelas yang di ikuti
 	Route::get('home', ['as' => 'home', 'uses' => 'KelasController@index']);
 
-	# Kelas - Tampil Kelas
+	# Kelas - Tampil kelas berdasarkan id juga menampilkan stream milik kelas
 	Route::get('mahasiswa/kelas/show/{kelas_id}', ['as' => 'kelas.show-mahasiswa', 'uses' => 'KelasController@getShowKelasMahasiswa']);
 	Route::get('dosen/kelas/show/{kelas_id}', ['as' => 'kelas.show-dosen', 'uses' => 'KelasController@getShowKelasDosen']);
 	# Kelas - Cari kelas
@@ -37,7 +38,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('dosen/kelas/show/{kelas_id}/buat-tugas', ['as' => 'kelas.show-buat_tugas', 'uses' => 'KelasController@getCreateTugas']);
 	Route::post('dosen/kelas/show/{kelas_id}/buat-tugas', ['as' => 'kelas.store-buat_tugas', 'uses' => 'KelasController@postCreateTugas']);
 
-	# User
+	# User - Halaman Profile
 	Route::resource('users', 'UsersController', ['only' => 'show']);
 
 	# Halaman admin, hanya bisa di akses user tertentu
